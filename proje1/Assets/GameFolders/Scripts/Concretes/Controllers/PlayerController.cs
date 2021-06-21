@@ -5,6 +5,7 @@ using proje1.Inputs;
 using proje1.Movements;
 
 
+
 namespace proje1.Controllers
 {
     public class PlayerController : MonoBehaviour
@@ -19,7 +20,9 @@ namespace proje1.Controllers
 
         Rotator _rotator;
 
-        bool _isForceUp;
+        Fuel _fuel;
+
+        bool _canForceUp;
 
         float _LeftRight;
 
@@ -32,18 +35,21 @@ namespace proje1.Controllers
             _input = new DefaultInput();
             _mover = new Mover(playerController:this );
             _rotator = new Rotator(playerController: this);
+            _fuel = GetComponent<Fuel>();
+
         }
         private void Update()
         {
-            Debug.Log(_input.IsForceUp);
-            if (_input.IsForceUp)
+         
+            if (_input.IsForceUp && ! _fuel.IsEmpty)
             {
-                _isForceUp = true;
+                _canForceUp = true;
 
             }
             else
             {
-                _isForceUp = false;
+                _canForceUp = false;
+                _fuel.FuelIncrease(increase: 0.01f);
             }
 
             _LeftRight = _input.LeftRight;
@@ -51,10 +57,10 @@ namespace proje1.Controllers
         }
         private void FixedUpdate()
         {
-            if (_isForceUp)
+            if (_canForceUp)
             {
-
                 _mover.FixedTick();
+                _fuel.FuelDecrease(0.2f);
             }
 
             _rotator.FixedTick(_LeftRight);
