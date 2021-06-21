@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8827313877885612723}
   - component: {fileID: 5394841117060942194}
+  - component: {fileID: 1191613926}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -45,6 +46,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 932fcc66cf0dece47858e1e975f1130a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &1191613926
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 315833332445208385}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.3857995, y: 1.5352757, z: 0.36209914}
+  m_Center: {x: 0.03789209, y: -0.015211463, z: -0.15067665}
 --- !u!1 &2772201370800351856
 GameObject:
   m_ObjectHideFlags: 0
@@ -971,7 +985,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: -26.066406}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
