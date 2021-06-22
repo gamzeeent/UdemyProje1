@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using proje1.Inputs;
 using proje1.Movements;
+using proje1.Managers;
 
 
 
@@ -23,6 +24,7 @@ namespace proje1.Controllers
         Fuel _fuel;
 
         bool _canForceUp;
+        bool _canMove;
 
         float _LeftRight;
 
@@ -38,8 +40,27 @@ namespace proje1.Controllers
             _fuel = GetComponent<Fuel>();
 
         }
+
+        private void Start()
+        {
+            _canMove = true;
+        }
+
+        private void OnEnable()
+        {
+            GameManager.Instance.OnGameOver += HandleOnEventTriggered;
+        }
+
+        private void OnDisable()
+        {
+            GameManager.Instance.OnGameOver -= HandleOnEventTriggered;
+
+        }
+
+
         private void Update()
         {
+            if (!_canMove) return;
          
             if (_input.IsForceUp && ! _fuel.IsEmpty)
             {
@@ -66,6 +87,15 @@ namespace proje1.Controllers
             _rotator.FixedTick(_LeftRight);
 
         }
+        private void HandleOnEventTriggered()
+        {
+            _canMove = false;
+            _canForceUp = false;
+            _LeftRight = 0f;
+            _fuel.FuelIncrease(increase: 0f);
+        }
+
+
     }
 
 }
